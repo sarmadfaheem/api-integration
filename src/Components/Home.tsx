@@ -1,3 +1,4 @@
+import "./Home.css";
 import Navbar from "./Navbar";
 
 function Home() {
@@ -7,7 +8,7 @@ function Home() {
       <header>
         <Navbar />
         <div>
-          <h1 className="text-5xl text-center py-8 text-white">
+          <h1 className="text-5xl text-center py-8 font-bold">
             CRUD with Tanstack
           </h1>
         </div>
