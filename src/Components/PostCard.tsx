@@ -15,30 +15,28 @@ interface PostCardProps {
 function PostCard({ post }: PostCardProps) {
   return (
     <>
-      <div className="max-w-[335px] w-full h-[420px]!">
-        <Card className="h-full justify-between">
-          <CardHeader>
-            <CardTitle>Fetching Post</CardTitle>
-            <CardDescription>with Shadcn UI</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <p>
-              <strong>ID:</strong> {post.id}
-            </p>
+      <Card className="h-full justify-between bg-violet-200">
+        <CardHeader>
+          <CardTitle>Fetching Post</CardTitle>
+          <CardDescription>with Shadcn UI</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p>
+            <strong>ID:</strong> {post.id}
+          </p>
 
-            <p>
-              <strong>Title:</strong> {post.title}
-            </p>
-            <p>
-              <strong>Body:</strong> {post.body}
-            </p>
-          </CardContent>
-          <CardFooter className="justify-end gap-x-3">
-            <Button>Edit</Button>
-            <Button>Delete</Button>
-          </CardFooter>
-        </Card>
-      </div>
+          <p>
+            <strong>Title:</strong> {post.title}
+          </p>
+          <p>
+            <strong>Body:</strong> {post.body}
+          </p>
+        </CardContent>
+        <CardFooter className="justify-end gap-x-3">
+          <Button>Edit</Button>
+          <Button>Delete</Button>
+        </CardFooter>
+      </Card>
     </>
   );
 }

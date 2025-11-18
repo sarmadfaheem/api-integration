@@ -18,7 +18,7 @@ function PostListing() {
 
   return (
     <>
-      <div className="post-container flex flex-wrap gap-4">
+      <div className="post-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {isPostLoading
           ? "Loading"
           : fetchedPosts?.map((post) => <PostCard post={post} key={post.id} />)}
