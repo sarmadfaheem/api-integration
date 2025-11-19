@@ -6,6 +6,19 @@ const api = axios.create({
 });
 
 export const getPost = async () => {
-  const response = await api.get<PostType[]>(`/posts?_start=1&_limit=8`);
-  return response.data;
+  try {
+    const response = await api.get<PostType[]>(`/posts?_start=0&_limit=8`);
+    return response.status === 200 ? response.data : [];
+  } catch (error) {
+    console.log("Something went wrong", error);
+  }
+};
+
+export const fetchIndPost = async (id: string) => {
+  try {
+    const response = await api.get<PostType[]>(`/posts/${id}`);
+    return response.status === 200 ? response.data : [];
+  } catch (error) {
+    console.log("Something went wrong", error);
+  }
 };

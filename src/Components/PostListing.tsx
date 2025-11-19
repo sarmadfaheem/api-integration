@@ -9,7 +9,7 @@ function PostListing() {
     isLoading: isPostLoading,
     error: postError,
   } = useQuery({
-    queryKey: ["post"],
+    queryKey: ["posts"],
     queryFn: getPost,
   });
 
@@ -31,9 +31,11 @@ function PostListing() {
           {isPostLoading
             ? "Loading"
             : fetchedPosts?.map((post) => (
-                <NavLink to={`/ind/${post.id}`}>
-                  <PostCard post={post} key={post.id} />
-                </NavLink>
+                <div key={post.id}>
+                  <NavLink to={`/ind/${post.id}`}>
+                    <PostCard post={post} />
+                  </NavLink>
+                </div>
               ))}
         </div>
       </div>
