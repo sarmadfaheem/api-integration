@@ -10,13 +10,17 @@ function Navbar() {
     <>
       <div className="font-bold">
         <NavigationMenu>
-          <NavigationMenuList className="flex justify-around mt-20">
+          <NavigationMenuList className="flex justify-evenly mt-20">
             <NavigationMenuItem>
               <Link to="/">Home</Link>
             </NavigationMenuItem>
 
             <NavigationMenuItem>
               <Link to="/pc">Post</Link>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <Link to="/ind/:id">Individual</Link>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>

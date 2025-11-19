@@ -117,4 +117,10 @@
   body {
     @apply bg-black text-background;
   }
+  .main-container{
+    @apply max-w-11/12 mx-auto;
+  }
+  .post-container{
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5;
+  }
 }

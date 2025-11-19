@@ -6,6 +6,6 @@ const api = axios.create({
 });
 
 export const getPost = async () => {
-  const response = await api.get<PostType[]>("/posts");
+  const response = await api.get<PostType[]>(`/posts?_start=1&_limit=8`);
   return response.data;
 };

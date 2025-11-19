@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getPost } from "./PostApi";
 import PostCard from "./PostCard";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function PostListing() {
   const {
@@ -21,15 +21,19 @@ function PostListing() {
     <>
       <title>Post Container</title>
 
-      <div className="max-w-11/12 mx-auto">
-        <Link to="/" className="font-bold">
-          Home
-        </Link>
-        <div className="post-container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      <div className="main-container">
+        <div className="my-10 text-center">
+          <Link to="/" className="font-bold">
+            Home
+          </Link>
+        </div>
+        <div className="post-container">
           {isPostLoading
             ? "Loading"
             : fetchedPosts?.map((post) => (
-                <PostCard post={post} key={post.id} />
+                <NavLink to={`/ind/${post.id}`}>
+                  <PostCard post={post} key={post.id} />
+                </NavLink>
               ))}
         </div>
       </div>
