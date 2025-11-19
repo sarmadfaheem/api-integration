@@ -26,10 +26,22 @@ function PostListing() {
       <title>Post Container</title>
 
       <div className="main-container">
-        <div className="mt-5 mb-5 text-center">
-          <Link to="/" className="font-bold">
-            Home
-          </Link>
+        <div className="flex justify-around mt-5 mb-5">
+          <div>
+            <Link to="/" className="font-bold">
+              Home
+            </Link>
+          </div>
+          <div className="flex justify-center items-center space-x-6">
+            <Button
+              disabled={page === 0 ? true : false}
+              onClick={() => setPage((prev) => prev - 8)}
+            >
+              Prev
+            </Button>
+            <p className="inline-block">{page / 8 + 1}</p>
+            <Button onClick={() => setPage((prev) => prev + 8)}>Next</Button>
+          </div>
         </div>
         <div className="post-container">
           {isPostLoading
@@ -39,16 +51,6 @@ function PostListing() {
                   <PostCard post={post} page={page} />
                 </div>
               ))}
-        </div>
-        <div className="flex justify-center items-center space-x-6 mt-3">
-          <Button
-            disabled={page === 0 ? true : false}
-            onClick={() => setPage((prev) => prev - 8)}
-          >
-            Prev
-          </Button>
-          <p className="inline-block">{page / 8 + 1}</p>
-          <Button onClick={() => setPage((prev) => prev + 8)}>Next</Button>
         </div>
       </div>
     </>
