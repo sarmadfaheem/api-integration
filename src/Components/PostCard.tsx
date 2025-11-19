@@ -9,7 +9,7 @@ import {
 } from "./ui/card";
 import { Button } from "./ui/button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deletePost } from "./PostApi";
+import { deletePost, updatePost } from "./PostApi";
 import { NavLink } from "react-router-dom";
 
 interface PostCardProps {
@@ -26,6 +26,25 @@ function PostCard({ post, page }: PostCardProps) {
         ["posts", page],
         (oldData: PostType[] | undefined) => {
           return oldData?.filter((post) => post.id !== id);
+        }
+      );
+    },
+  });
+
+  const updateMutation = useMutation({
+    mutationFn: (id: string) => updatePost(id),
+    onSuccess(data, id) {
+      queryClient.setQueryData(
+        ["posts", page],
+        (oldData: PostType[] | undefined) => {
+          return oldData?.map((post) => {
+            return post.id === id
+              ? {
+                  ...post,
+                  title: data.data,
+                }
+              : post;
+          });
         }
       );
     },
@@ -52,7 +71,7 @@ function PostCard({ post, page }: PostCardProps) {
           </CardContent>
         </NavLink>
         <CardFooter className="justify-end gap-x-3">
-          <Button>Edit</Button>
+          <Button onClick={() => updateMutation.mutate(post.id)}>Update</Button>
           <Button onClick={() => deleteMutation.mutate(post.id)}>Delete</Button>
         </CardFooter>
       </Card>

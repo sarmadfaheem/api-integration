@@ -1,6 +1,5 @@
 import axios from "axios";
 import type { PostType } from "../types/PostType";
-import { title } from "process";
 
 const api = axios.create({
   baseURL: "https://jsonplaceholder.typicode.com",
