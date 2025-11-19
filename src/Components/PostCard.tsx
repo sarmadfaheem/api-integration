@@ -8,11 +8,29 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Button } from "./ui/button";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deletePost } from "./PostApi";
+import { NavLink } from "react-router-dom";
 
 interface PostCardProps {
   post: PostType;
+  page: number;
 }
-function PostCard({ post }: PostCardProps) {
+function PostCard({ post, page }: PostCardProps) {
+  const queryClient = useQueryClient();
+
+  const deleteMutation = useMutation({
+    mutationFn: (id: string) => deletePost(id),
+    onSuccess(data, id) {
+      queryClient.setQueryData(
+        ["posts", page],
+        (oldData: PostType[] | undefined) => {
+          return oldData?.filter((post) => post.id !== id);
+        }
+      );
+    },
+  });
+
   return (
     <>
       <Card className="h-full justify-between bg-violet-200">
@@ -20,21 +38,22 @@ function PostCard({ post }: PostCardProps) {
           <CardTitle>Fetching Post</CardTitle>
           <CardDescription>with Shadcn UI</CardDescription>
         </CardHeader>
-        <CardContent>
-          <p>
-            <strong>ID:</strong> {post.id}
-          </p>
-
-          <p>
-            <strong>Title:</strong> {post.title}
-          </p>
-          <p>
-            <strong>Body:</strong> {post.body}
-          </p>
-        </CardContent>
+        <NavLink to={`/ind/${post.id}`}>
+          <CardContent>
+            <p>
+              <strong>ID:</strong> {post.id}
+            </p>
+            <p>
+              <strong>Title:</strong> {post.title}
+            </p>
+            <p>
+              <strong>Body:</strong> {post.body}
+            </p>
+          </CardContent>
+        </NavLink>
         <CardFooter className="justify-end gap-x-3">
           <Button>Edit</Button>
-          <Button>Delete</Button>
+          <Button onClick={() => deleteMutation.mutate(post.id)}>Delete</Button>
         </CardFooter>
       </Card>
     </>
