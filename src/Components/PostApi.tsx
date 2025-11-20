@@ -29,9 +29,3 @@ export const deletePost = (id: string) => {
   return api.delete(`/posts/${id}`);
 };
 
-export const updatePost = async (id: string) => {
-  const res = await api.patch<PostType>(`/posts/${id}`, {
-    title: "I have Updated",
-  });
-  return res.data;
-};

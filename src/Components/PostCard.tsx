@@ -9,7 +9,7 @@ import {
 } from "./ui/card";
 import { Button } from "./ui/button";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deletePost, updatePost } from "./PostApi";
+import { deletePost } from "./PostApi";
 import { NavLink } from "react-router-dom";
 import { useUpdatePost } from "@/hooks/api/use-update-post";
 

@@ -3,13 +3,7 @@ import type { PostType } from "@/types/PostType";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 
-export const updatePost = async ({
-  id,
-  page,
-}: {
-  id: string;
-  page: number;
-}) => {
+const updatePost = async ({ id, page }: { id: string; page: number }) => {
   const res = await api.patch<PostType>(`/posts/${id}`, {
     title: "I have Updated",
   });
