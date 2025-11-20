@@ -5,9 +5,14 @@ import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { Toaster } from "sonner";
+import { useForm } from "react-hook-form";
+import type { PostType } from "@/types/PostType";
+import { useCreatePost } from "@/hooks/api/use-create-post";
 
 function PostListing() {
   const [page, setPage] = useState(0);
+
+  const { mutate: createPost } = useCreatePost();
 
   const {
     data: fetchedPosts,
@@ -22,6 +27,9 @@ function PostListing() {
     console.error("Something Went Wrong", postError);
   }
 
+  const createPostFrom = useForm<PostType>();
+  const { register, handleSubmit } = createPostFrom;
+
   return (
     <>
       <title>Post Container</title>
@@ -29,10 +37,42 @@ function PostListing() {
       <div className="main-container">
         <Toaster position="top-center" />
         <div className="flex justify-around mt-5 mb-5">
-          <div>
+          <div className="mt-4">
             <Link to="/" className="font-bold">
               Home
             </Link>
+          </div>
+          <div>
+            <form
+              className="flex justify-center items-end space-x-6"
+              onSubmit={handleSubmit((data) => {
+                console.log("🚀 ~ PostListing ~ data:", data);
+                createPost({ payload: data, page });
+              })}
+            >
+              <div>
+                <label htmlFor="title">Title</label>
+                <br />
+                <input
+                  className="bg-white text-black"
+                  type="text"
+                  {...register("title")}
+                />
+              </div>
+              <div>
+                <label htmlFor="title">Body</label>
+                <br />
+                <input
+                  className="bg-white text-black"
+                  type="text"
+                  {...register("body")}
+                />
+              </div>
+              <input
+                className="bg-white text-black font-bold px-2 p-0.5"
+                type="submit"
+              />
+            </form>
           </div>
           <div className="flex justify-center items-center space-x-6">
             <Button
@@ -41,7 +81,7 @@ function PostListing() {
             >
               Prev
             </Button>
-            <p className="inline-block">{page / 8 + 1}</p>
+            <p>{page / 8 + 1}</p>
             <Button onClick={() => setPage((prev) => prev + 8)}>Next</Button>
           </div>
         </div>

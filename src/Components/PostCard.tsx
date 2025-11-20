@@ -44,12 +44,12 @@ function PostCard({ post, page }: PostCardProps) {
         <CardFooter className="justify-end gap-x-3">
           <Button
             onClick={() => {
-              updatePost({ id: post.id, page });
+              updatePost({ id: post?.id ?? "", page });
             }}
           >
             Update
           </Button>
-          <Button onClick={() => deletePost({ id: post.id, page })}>
+          <Button onClick={() => deletePost({ id: post?.id ?? "", page })}>
             Delete
           </Button>
         </CardFooter>

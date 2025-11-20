@@ -22,6 +22,9 @@ function Navbar() {
             <NavigationMenuItem>
               <Link to="/ind/:id">Individual</Link>
             </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link to="/users">Users</Link>
+            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       </div>
