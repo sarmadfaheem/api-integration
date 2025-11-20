@@ -4,6 +4,7 @@ import PostCard from "./PostCard";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { useState } from "react";
+import { Toaster } from "sonner";
 
 function PostListing() {
   const [page, setPage] = useState(0);
@@ -26,6 +27,7 @@ function PostListing() {
       <title>Post Container</title>
 
       <div className="main-container">
+        <Toaster position="top-center" />
         <div className="flex justify-around mt-5 mb-5">
           <div>
             <Link to="/" className="font-bold">

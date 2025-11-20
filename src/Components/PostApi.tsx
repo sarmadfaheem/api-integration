@@ -1,7 +1,7 @@
 import axios from "axios";
 import type { PostType } from "../types/PostType";
 
-const api = axios.create({
+export const api = axios.create({
   baseURL: "https://jsonplaceholder.typicode.com",
 });
 
@@ -29,6 +29,9 @@ export const deletePost = (id: string) => {
   return api.delete(`/posts/${id}`);
 };
 
-export const updatePost = (id: string) => {
-  return api.patch(`/posts/${id}`, { title: "I have Updated" });
+export const updatePost = async (id: string) => {
+  const res = await api.patch<PostType>(`/posts/${id}`, {
+    title: "I have Updated",
+  });
+  return res.data;
 };
