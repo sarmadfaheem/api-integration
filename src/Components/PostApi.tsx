@@ -25,7 +25,4 @@ export const fetchIndPost = async (id: string | undefined) => {
   }
 };
 
-export const deletePost = (id: string) => {
-  return api.delete(`/posts/${id}`);
-};
 
