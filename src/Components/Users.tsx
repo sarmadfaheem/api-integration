@@ -2,7 +2,19 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 function Users() {
-  const { register } = useForm<{ email: string }>();
+  const UsersForm = useForm<{ email: string }>({
+    mode: "all",
+  });
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = UsersForm;
+
+  const onSubmit = () => {
+    console.log("Submitted");
+  };
 
   return (
     <div className="main-container">
@@ -11,7 +23,23 @@ function Users() {
           Home
         </Link>
       </div>
-      <input type="text" {...register("email")} />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label className="text-white" htmlFor="email">
+          Email
+        </label>
+        <br />
+        <input
+          className="bg-white text-black px-2.5"
+          type="text"
+          placeholder="Email"
+          {...register("email", {
+            required: { value: true, message: "The email is Required" },
+            maxLength: { value: 10, message: "Too many characters" },
+          })}
+        />
+
+        <p className="text-white">{errors.email?.message}</p>
+      </form>
     </div>
   );
 }
