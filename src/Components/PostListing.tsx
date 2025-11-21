@@ -28,7 +28,7 @@ function PostListing() {
   }
 
   const createPostFrom = useForm<PostType>();
-  const { register, handleSubmit } = createPostFrom;
+  const { register, handleSubmit, reset } = createPostFrom;
 
   return (
     <>
@@ -48,13 +48,14 @@ function PostListing() {
               onSubmit={handleSubmit((data) => {
                 console.log("🚀 ~ PostListing ~ data:", data);
                 createPost({ payload: data, page });
+                reset({ body: "", title: "" });
               })}
             >
               <div>
                 <label htmlFor="title">Title</label>
                 <br />
                 <input
-                  className="bg-white text-black"
+                  className="bg-white text-black  my-1.5 "
                   type="text"
                   {...register("title")}
                 />
@@ -63,13 +64,13 @@ function PostListing() {
                 <label htmlFor="title">Body</label>
                 <br />
                 <input
-                  className="bg-white text-black"
+                  className="bg-white text-black  my-1.5"
                   type="text"
                   {...register("body")}
                 />
               </div>
               <input
-                className="bg-white text-black font-bold px-2 p-0.5"
+                className="bg-white text-black font-bold px-2 p-0.5 rounded-md mb-1.5"
                 type="submit"
               />
             </form>
