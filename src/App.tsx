@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import PostListing from "./Components/PostListing";
 import Home from "./Components/Home";
 import IndividualPost from "./Components/IndiviualPost";
-import Users from "./Components/Users";
+import Users from "./Users/components/Users";
 
 function App() {
   return (
